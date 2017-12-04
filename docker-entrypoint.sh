@@ -11,6 +11,15 @@ fi
 
 mkdir -p ~/.ethereum/tendermint
 
+if [ ! -d ~/.ethereum/ethermint/chaindata ]; then
+  echo "--> Initialising Blockchain using: $ETH_GENESIS_PATH"
+  if [ ! -f $ETH_GENESIS_PATH ]; then
+    echo "Missing Ethereum genesis file at $ETH_GENESIS_PATH"
+    exit 1
+  fi
+  ethermint --with-tendermint init $ETH_GENESIS_PATH
+fi
+
 if [ -n "$TENDERMINT_CONFIG_PATH" ]; then
   cp -f $TENDERMINT_CONFIG_PATH ~/.ethereum/tendermint/config.toml
 fi
@@ -21,16 +30,7 @@ if [ -n "$TENDERMINT_PRIV_VALIDATOR_PATH" ]; then
   cp -f $TENDERMINT_PRIV_VALIDATOR_PATH ~/.ethereum/tendermint/priv_validator.json
 fi
 
-if [ ! -d ~/.ethereum/ethermint/chaindata ]; then
-  echo "--> Initialising Blockchain using: $ETH_GENESIS_PATH"
-  if [ ! -f $ETH_GENESIS_PATH ]; then
-    echo "Missing Ethereum genesis file at $ETH_GENESIS_PATH"
-    exit 1
-  fi
-  ethermint --with-tendermint init $ETH_GENESIS_PATH
-fi
-
-sed -i "s|ZZ_HOSTNAME|$HOSTNAME|g" ~/.ethermint/tendermint/config.toml
+sed -i "s|ZZ_HOSTNAME|$HOSTNAME|g" ~/.ethereum/tendermint/config.toml
 
 echo "--> Starting Ethermint"
 ethermint --with-tendermint "$@"
