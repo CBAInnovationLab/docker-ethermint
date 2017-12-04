@@ -6,7 +6,7 @@ This is the Git repo of the CBA Innovation Lab's [Ethermint](https://github.com/
 
 When the container starts it will first check if Ethermint has been initialised with an [Ethereum genesis](https://github.com/ethereum/go-ethereum/wiki/Private-network) file.  If it has not, it will first run `ethermint init` using the genesis file specified by either of the following environment variables.
 
-`ETH_GENESIS_FILE`: The path to a genesis file that's been mounted in to the container
+`ETH_GENESIS_PATH`: The path to a genesis file that's been mounted in to the container
 
 `ETH_GENESIS_CONTENT`: the JSON encoded contents of the genesis that you would like to use
 
