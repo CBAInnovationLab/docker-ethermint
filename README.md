@@ -10,6 +10,8 @@ When the container starts it will first check if Ethermint has been initialised 
 
 `ETH_GENESIS_CONTENT`: the JSON encoded contents of the genesis that you would like to use
 
+`TENDERMINT_ADDR`: The address of the Tendermint node to use. If not supplied ethermint will start with `--with-tendermint`
+
 ## Usage
 
 Use the following to run an Ethermint node with some options specified
